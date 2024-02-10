@@ -301,7 +301,6 @@ PROJECT CSS
 Toggle Container
 ========
 */
-
 .toggle-container {
   width: var(--view-width);
   max-width: var(--max-width);
@@ -320,6 +319,7 @@ Toggle Container
   place-items: center;
   cursor: pointer;
 }
+
 .toggle-icon {
   font-size: 1.5rem;
   color: var(--textColor);
@@ -329,9 +329,11 @@ Toggle Container
 Search Form
 ========
 */
+
 .title {
-  color: var(--primary-500);
+  letter-spacing: 3px;
 }
+
 .search-form {
   width: var(--view-width);
   max-width: var(--fixed-width);
@@ -345,14 +347,16 @@ Search Form
   border-color: var(--grey-300);
   transition: var(--darkModeTransition);
   color: var(--textColor);
-  border-radius: 0;
-
-  /* border-right: none; */
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 .search-form .btn {
-  border-radius: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border: 1px solid var(--primary-500);
 }
+
 .search-form .btn:hover {
   background: var(--primary-300);
   color: var(--black);
@@ -373,16 +377,46 @@ Gallery
 }
 
 .image-container .img {
-  height: 10rem;
+  height: 15rem;
+  object-fit: cover;
+  cursor: pointer;
+  transition: var(--transition);
 }
 
-@media (min-width: 768px) {
+.image-container .img:hover {
+  transform: translateY(-5px);
+  box-shadow: 2px 3px 15px 0px rgba(255, 255, 255, 0.3);
+}
+
+@media screen and (min-width: 768px) {
   .image-container {
     grid-template-columns: 1fr 1fr;
   }
 }
-@media (min-width: 992px) {
+
+@media screen and (min-width: 768px) {
   .image-container {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
   }
+}
+
+main {
+  position: relative;
+}
+
+.pagination {
+  display: flex;
+  width: var(--fixed-width);
+  margin: 2rem auto;
+  justify-content: center;
+  column-gap: 2rem;
+  align-items: center;
+  position: sticky;
+  bottom: 1rem;
+  font-weight: 500;
+}
+
+.btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
 }

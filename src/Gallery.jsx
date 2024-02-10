@@ -7,11 +7,13 @@ const url = `https://api.unsplash.com/search/photos?client_id=${
 }`;
 
 const Gallery = () => {
-  const { searchTerm } = useGlobalContext();
+  const { searchTerm, fetchPage, setFetchPage } = useGlobalContext();
   const response = useQuery({
-    queryKey: ["images", searchTerm],
+    queryKey: ["images", searchTerm, fetchPage],
     queryFn: async () => {
-      const result = await axios.get(`${url}&query=${searchTerm}&per_page=12`);
+      const result = await axios.get(
+        `${url}&query=${searchTerm}&per_page=12&page=${fetchPage}`
+      );
       return result.data;
     },
   });
@@ -42,14 +44,48 @@ const Gallery = () => {
     );
   }
   return (
-    <section className="image-container">
-      {results.map((item) => {
-        const url = item?.urls?.regular;
-        return (
-          <img src={url} key={item.id} alt={item.description} className="img" />
-        );
-      })}
-    </section>
+    <main>
+      <section className="image-container">
+        {results.map((item) => {
+          const url = item?.urls?.regular;
+          return (
+            <img
+              src={url}
+              key={item.id}
+              alt={item.description}
+              className="img"
+            />
+          );
+        })}
+      </section>
+      <div className="pagination">
+        <button
+          type="button"
+          className="btn"
+          onClick={() => {
+            setFetchPage((prev) => Math.max(prev - 1, 1));
+            console.log(fetchPage);
+          }}
+          disabled={fetchPage === 1}
+          style={{ pointerEvents: fetchPage === 1 ? "none" : "" }}
+        >
+          Prev
+        </button>
+        <p>
+          {fetchPage} / {response.data.total_pages}
+        </p>
+        <button
+          type="button"
+          className="btn"
+          onClick={() => {
+            setFetchPage((prev) => (prev + 1) % response.data.total_pages);
+            console.log(fetchPage);
+          }}
+        >
+          Next
+        </button>
+      </div>
+    </main>
   );
 };
 export default Gallery;
