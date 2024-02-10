@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useGlobalContext } from "./context";
+import Skeleton from "react-loading-skeleton";
 
 const url = `https://api.unsplash.com/search/photos?client_id=${
   import.meta.env.VITE_API_KEY
@@ -21,7 +22,15 @@ const Gallery = () => {
   if (response.isLoading) {
     return (
       <section className="image-container">
-        <h4>Loading...</h4>
+        {Array.from({ length: 12 }, (_, index) => (
+          <Skeleton
+            key={index}
+            width="352px"
+            height="240px"
+            baseColor="#a39b9b"
+            highlightColor="#fffafa"
+          />
+        ))}
       </section>
     );
   }
@@ -43,6 +52,7 @@ const Gallery = () => {
       </section>
     );
   }
+
   return (
     <main>
       <section className="image-container">

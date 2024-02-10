@@ -376,6 +376,12 @@ Gallery
   gap: 2rem;
 }
 
+.image-container h4 {
+  grid-column: span 3;
+  text-align: center;
+  margin-top: 2rem;
+}
+
 .image-container .img {
   height: 15rem;
   object-fit: cover;
@@ -385,7 +391,7 @@ Gallery
 
 .image-container .img:hover {
   transform: translateY(-5px);
-  box-shadow: 2px 3px 15px 0px rgba(255, 255, 255, 0.3);
+  box-shadow: 2px 3px 15px 0px rgba(50, 166, 205, 0.496);
 }
 
 @media screen and (min-width: 768px) {
