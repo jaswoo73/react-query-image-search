@@ -374,6 +374,7 @@ Gallery
   margin: 3rem auto;
   display: grid;
   gap: 2rem;
+  place-items: center;
 }
 
 .image-container h4 {
@@ -400,7 +401,7 @@ Gallery
   }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1000px) {
   .image-container {
     grid-template-columns: repeat(3, 1fr);
   }

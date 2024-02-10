@@ -25,10 +25,10 @@ const Gallery = () => {
         {Array.from({ length: 12 }, (_, index) => (
           <Skeleton
             key={index}
-            width="352px"
-            height="240px"
             baseColor="#a39b9b"
             highlightColor="#fffafa"
+            className="skeleton"
+            style={{ width: "350px", height: "15rem" }}
           />
         ))}
       </section>
@@ -74,10 +74,8 @@ const Gallery = () => {
           className="btn"
           onClick={() => {
             setFetchPage((prev) => Math.max(prev - 1, 1));
-            console.log(fetchPage);
           }}
           disabled={fetchPage === 1}
-          style={{ pointerEvents: fetchPage === 1 ? "none" : "" }}
         >
           Prev
         </button>
@@ -88,9 +86,9 @@ const Gallery = () => {
           type="button"
           className="btn"
           onClick={() => {
-            setFetchPage((prev) => (prev + 1) % response.data.total_pages);
-            console.log(fetchPage);
+            setFetchPage((prev) => prev + 1);
           }}
+          disabled={fetchPage === response.data.total_pages}
         >
           Next
         </button>
